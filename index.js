@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native'
-import TaskList from './src/screen/taskList'
+import TaskList from './src/screen/auth'
 import {name as appName} from './app.json'
 
 AppRegistry.registerComponent(appName, () => TaskList);

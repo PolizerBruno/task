@@ -98,7 +98,7 @@ export default class TaskList extends Component{
                 renderItem={ ({item}) => <Task {...item} toggleTask = {this.toggleTask} onDelete={this.onDelete} />} />
             </SafeAreaView>
             <TouchableOpacity activeOpacity={0.7}  style={Style.OpenModalAddTask} onPress={() => this.setState({showAddTask : true})}>
-                <Icon name="plus" size={30} color="#FFFFFF"/>
+                <Icon name="plus" size={15} color="#FFFFFF"/>
             </TouchableOpacity>
         </SafeAreaView>
         )

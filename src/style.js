@@ -1,6 +1,60 @@
 import {StyleSheet, Dimensions} from 'react-native'
 
 export default StyleSheet.create({
+    RecoverPass: {
+        flex: 1,
+        alignContent : "center",
+        alignItems : "center"
+    },
+    RegisterText : {
+        color : '#000',
+        fontSize : 15,
+    },
+    LoginButton : {
+        marginBottom : 10,
+        borderWidth : 0.5,
+        borderRadius : 20,
+        width : '80%',
+        backgroundColor : "#08B9E0",
+        alignItems : "center",
+        alignContent : "center"
+    },
+    registerButton : {
+        borderWidth : 0.5,
+        borderRadius : 20,
+        marginBottom : 10,
+        width : '80%',
+        alignItems : "center",
+        alignContent : "center"
+    },    
+    RegisterArea : {
+        flex: 1,
+        margin : 5,
+        width : '100%',
+    },  
+    RecoverText : {
+        marginBottom : 40,
+    },  
+    LoginText : {
+        textAlign : 'center',
+        fontSize : 20,
+        color : "#FFFFFF",
+        fontStyle : "italic",
+        textShadowColor : "#000",
+        textShadowRadius : 1,
+        textShadowOffset: { width: 1, height:1},
+        textTransform : "capitalize"
+    },  
+    LoginForm : {
+        width : '60%',
+        backgroundColor : 'rgba(255,255,255,0.75)',
+        position: "absolute",
+        left : '20%',
+        top : '35.0%',
+        alignItems : "center",
+        alignContent : "center",
+        borderRadius : 15,
+    },  
     Exclude:{
         flex : 0.15,
         justifyContent : "center",
@@ -35,9 +89,10 @@ export default StyleSheet.create({
     },
     Input : {
         height : 40,
-        margin: 15,
+        width : '80%',
+        margin: 10,
         backgroundColor : '#FFFFFF',
-        borderWidth : 1,
+        borderWidth : 1.5,
         borderColor : '#E3E3E3',
         borderRadius : 5,
     },
