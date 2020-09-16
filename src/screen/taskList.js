@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Text,SafeAreaView, ImageBackground, View, TouchableOpacity,Platform, Alert} from 'react-native'
+import {Text,SafeAreaView, ImageBackground, View, TouchableOpacity, Alert} from 'react-native'
 import TaskImage from '../../assets/imgs/office.jpg'
 import Moment from 'moment'
 import 'moment/locale/pt-br'
@@ -9,6 +9,8 @@ import { FlatList } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AddTask from './addTask'
 import AsyncStorage from '@react-native-community/async-storage'
+import {server,showError} from '../api'
+import axios from 'axios'
 
 const initialState = {
     showAddTask : false,
@@ -18,15 +20,28 @@ const initialState = {
 }
 
 export default class TaskList extends Component{
-
     state = {
        ...initialState
     }
+    getOnlineTask = async(id)=>{
+        try {
+            const query = await axios.post(`${server}/taskManager`,{
+               id : id
+            })
+            console.warn(JSON.stringify(query.data))
+            this.setState({visibleTasks : JSON.stringify(query.data)})
+        }catch (error) {
+            showError(error)
+        }
+    }
+
     componentDidMount = async() =>{
        const stateString =  await AsyncStorage.getItem('taskState')
        const state = JSON.parse(stateString) || initialState
-       this.setState(state,this.filterTasks)
-       
+       this.setState(state.this.filterTasks)
+       const {params} = this.props.navigation.state
+       const userId = params ? params.user : this.props.navigation.navigate('Auth');
+       this.getOnlineTask(userId)
     }
 
     filterTasks = () => {

@@ -9,7 +9,6 @@ import Swipeable from 'react-native-gesture-handler/Swipeable'
 export default props => {
 
     const done = props.completeAt != null ? {textDecorationLine : 'line-through'} : {}
-
     const date = props.completeAt ?  props.completeAt : props.toDoAt 
     const formatedDate = Moment(date).locale('pt-br').format('ddd, D [de] MMMM')
     const getRightContetent = () => {
@@ -17,7 +16,6 @@ export default props => {
             <TouchableOpacity onPress={()=> props.onDelete && props.onDelete(props.id)} style={Style.Exclude}><Icon name="trash" size={20} /><Text>Excluir</Text></TouchableOpacity>
         )
     }
-   
     return (
             <Swipeable 
             renderRightActions={getRightContetent}

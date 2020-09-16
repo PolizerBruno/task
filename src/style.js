@@ -12,7 +12,6 @@ export default StyleSheet.create({
     },
     LoginButton : {
         marginBottom : 10,
-        borderWidth : 0.5,
         borderRadius : 20,
         width : '80%',
         backgroundColor : "#08B9E0",
@@ -47,7 +46,7 @@ export default StyleSheet.create({
     },  
     LoginForm : {
         width : '60%',
-        backgroundColor : 'rgba(255,255,255,0.75)',
+        backgroundColor : 'rgba(255,255,255,0.85)',
         position: "absolute",
         left : '20%',
         top : '35.0%',
@@ -88,11 +87,11 @@ export default StyleSheet.create({
         justifyContent : "space-around",
     },
     Input : {
+        borderBottomWidth : 2,
         height : 40,
         width : '80%',
         margin: 10,
         backgroundColor : '#FFFFFF',
-        borderWidth : 1.5,
         borderColor : '#E3E3E3',
         borderRadius : 5,
     },
@@ -160,7 +159,20 @@ export default StyleSheet.create({
         width : '20%',
         alignItems : "flex-start",
         justifyContent : 'center',
-    },  
+    },
+    InputIcon : {
+        marginLeft : 30,
+    },
+    InputTextIcon:{
+        paddingLeft : 10,
+        margin : 5,
+        borderRadius : 10,
+        backgroundColor : 'rgb(255,255,255)',
+        flex : 1,
+        flexDirection : 'row',
+        alignItems : "center",
+        alignContent : 'center',
+    },
     Container : {
         flex : 1,
     },
