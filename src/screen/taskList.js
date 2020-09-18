@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Text,SafeAreaView, ImageBackground, View, TouchableOpacity, Alert} from 'react-native'
+import {Text,SafeAreaView, View, TouchableOpacity, Alert} from 'react-native'
 import Moment from 'moment'
 import 'moment/locale/pt-br'
 import Style from '../style'
@@ -16,6 +16,7 @@ const initialState = {
     showDoneTask : true,
     visibleTasks : [],
     tasks : [],
+    userId : '',
 }
 
 export default class TaskList extends Component{
@@ -25,22 +26,26 @@ export default class TaskList extends Component{
     getOnlineTask = async(id)=>{
         try {
             const query = await axios.post(`${server}/taskManager`,{
-               id : id
+               "id" : id
             })
-            console.warn(JSON.stringify(query.data))
-            this.setState({visibleTasks : JSON.stringify(query.data)})
+            query.data.forEach(element => {
+                this.state.tasks.push(element)
+            });
+           
         }catch (error) {
             showError(error)
         }
     }
 
+   
+
     componentDidMount = async() =>{
        const stateString =  await AsyncStorage.getItem('taskState')
-       const state = JSON.parse(stateString) || initialState
-       this.setState(state.this.filterTasks)
        const {params} = this.props.navigation.state
-       const userId = params ? params.user : this.props.navigation.navigate('Auth');
-       this.getOnlineTask(userId)
+       const userId = params ? params.user_id : this.props.navigation.navigate('Auth');
+       this.setState({userId : userId})
+       const onlineTask = await this.getOnlineTask(this.state.userId)
+       const abc = await this.filterTasks()
     }
 
     filterTasks = () => {
@@ -48,7 +53,8 @@ export default class TaskList extends Component{
         if(this.state.showDoneTask){
             visibleTasks = [...this.state.tasks]
         }else{
-            visibleTasks = this.state.tasks.filter(task=>{return task.completeAt === null})
+            const array = this.state.tasks || []
+            visibleTasks = array.filter(task=>{return task.completeAt === null})
         }
         this.setState({visibleTasks})
         AsyncStorage.setItem('taskState',JSON.stringify(this.state))
@@ -76,7 +82,6 @@ export default class TaskList extends Component{
             Alert.alert('Dados inválidos','Descrição não informada');
             return
         }
-
         const tasks = [...this.state.tasks]
         tasks.push({
             id: Math.random(),
@@ -91,11 +96,24 @@ export default class TaskList extends Component{
         const tasks = this.state.tasks.filter(task => task.id != taskId)
         this.setState({tasks},this.filterTasks)
     }
+    saveOnlineTask = async(task)=>{
+        try {
+            const query = await axios.post(`${server}/taskInsert`,{
+                "user_id" : this.state.userId,
+                "description" : task.description,
+                "toDoAt" : task.date,
+                "completeAt" : null,
+            })
+        } catch (error) {
+            Alert.alert('Erro','Erro não foi possivel cadastrar sua tarefa! Macacos treinados estão resolvendo seu problema, tente novamante mais tarde.')
+        }
+    }
+    
 
     render(){
         return(
         <SafeAreaView style={Style.Container}>
-            <AddTask onSave={this.addTask} isVisible={this.state.showAddTask} onCancel={() =>{this.setState({showAddTask : !this.state.showAddTask})}} />
+            <AddTask onSaveOnlineTask={this.saveOnlineTask} onSave={this.addTask} isVisible={this.state.showAddTask} onCancel={() =>{this.setState({showAddTask : !this.state.showAddTask})}} />
                 <View style={Style.ContainerFlexCenterUp}>
                     <Text style={Style.Hoje}>Hoje</Text>
                     <Text style={Style.Date}>{Moment().locale('pt-br').format('dddd, DD MMMM')}</Text>
@@ -112,6 +130,7 @@ export default class TaskList extends Component{
                 </View>
                 <View style={Style.ContainerFlexCenterDown}>
                     <SafeAreaView style={Style.ContainerFlexCenterDownInside}>
+                        <Text>{this.state.userId}</Text>
                         <FlatList  style={Style.FlatList} data ={this.state.visibleTasks} keyExtractor ={item => `${item.id}`} 
                         renderItem={ ({item}) => <Task style={Style.TaskLine} {...item} toggleTask = {this.toggleTask} onDelete={this.onDelete} />} />
                     </SafeAreaView>

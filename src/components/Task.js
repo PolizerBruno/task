@@ -39,7 +39,7 @@ function getCheckView(completeAt){
     if(completeAt !== null){
         return (
             <View style={Style.Done}>
-                <Icon name = "check" size ={15} color="#FFFFFF"></Icon>
+                <Icon name = "check" size ={15} color="#03E4FD"></Icon>
             </View>
         )
     }else{

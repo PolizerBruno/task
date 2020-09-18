@@ -31,7 +31,12 @@ export default class extends Component {
                 password : this.state.password,
                 comfirmPassword : this.state.comfirmPassword,
             })
-            query.status == '200' ? this.setState({...initialState},showSuccess('Obrigado por se cadastrar')) : Alert.alert('Erro',`${query.data}`)
+            
+            if(query.status == 201){
+                this.setState({...initialState},showSuccess('Obrigado por se cadastrar'))
+            }else{
+                Alert.alert('Erro',`Boiola`)
+            }
         } catch (error) {
             showError(error)
         }
@@ -43,8 +48,12 @@ export default class extends Component {
                 email : this.state.email,
                 password : this.state.password,
             })
-            query.status == '200' ? this.props.navigation.navigate('Home',{user : query.data.id}) : Alert.alert('Erro',`${query.data}`)
-        } catch (error) {
+            if(query.status == 201){
+                this.props.navigation.navigate('Home',{user_id : query.data.id})
+            }else{
+                Alert.alert('Erro',`${query.data.id}`)
+            }
+        }catch (error){
             showError(error)
         }
     }

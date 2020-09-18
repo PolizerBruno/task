@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Text,SafeAreaView,Modal,TouchableWithoutFeedback, View,TouchableOpacity,TextInput,Platform} from 'react-native'
+import {Text,Modal,TouchableWithoutFeedback, View,TouchableOpacity,TextInput,Platform, Alert} from 'react-native'
 import Style from '../style'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Moment from 'moment'
@@ -16,13 +16,15 @@ export default class AddTask extends Component{
     state = {
         ...initialState
     }
-    
+
+   
     save = () =>{
         const newTask = {
             description: this.state.description,
             date : this.state.date,
         }
-        this.props.onSave && this.props.onSave(newTask)
+        this.props.onSave && this.props.onSave(newTask);
+        this.props.onSaveOnlineTask(newTask);
         this.setState({...initialState})
     }
 
