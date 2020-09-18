@@ -48,9 +48,9 @@ export default class AddTask extends Component{
     }
     render(){
         return(
-            <Modal style={Style.Container} transparent={true} visible={this.props.isVisible}
+            <Modal style={Style.AddTask} transparent={true} visible={this.props.isVisible}
              onRequestClose={this.props.onCancel} animationType="slide">
-                <TouchableWithoutFeedback  onPress={this.props.onCancel}><View style={Style.AddTaskOverlay}></View></TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={this.props.onCancel}><View style={Style.AddTaskOverlay}></View></TouchableWithoutFeedback>
                     <View style={Style.FormArea}>
                         <Text style={Style.FormAreaHeader}>Nova Tarefa</Text>
                         <TextInput style = {Style.Input} placeholder="Informe a descrição" onChangeText={desc => this.setState({description : desc})} value={this.state.description}></TextInput>

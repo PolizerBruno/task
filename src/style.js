@@ -72,15 +72,12 @@ export default StyleSheet.create({
         textAlign : "center",
     }, 
     OpenModalAddTask: {
-        position : "absolute",
-        right : 10,
-        bottom : 10,
-        width : 50,
-        height : 50,
+        width : 30,
+        height : 30,
         borderRadius : 35,
         justifyContent : "center",
         alignItems : "center",
-        backgroundColor : "#C70039",
+        backgroundColor : "#000",
     },  
     Buttons : {
         flexDirection : 'row',
@@ -116,17 +113,24 @@ export default StyleSheet.create({
         textTransform : "capitalize"
     },
     FormArea : {
-        flex : 1,
+        width : '100%',
+        position : "absolute",
+        top : 30,
         backgroundColor : '#FFFFFF',
     },
     AddTaskOverlay:{
         flex: 1,
         backgroundColor: 'rgba(0,0,0,0.7)',
+    },
+    AddTask : {
+        flex : 1,
     },  
     IconBar:{
-        marginHorizontal : 20,
-        flexDirection : 'row',
-        justifyContent : "flex-end",
+        margin : 10,
+        flexDirection : 'row'
+    },
+    TaskLine : {
+        width : '100%'
     },
     Done : {
         height : 30,
@@ -176,39 +180,82 @@ export default StyleSheet.create({
     Container : {
         flex : 1,
     },
-    ContainerFlexCenter : {
+    ContainerFlexCenterUp : {
+        flex : 2,
+        backgroundColor : '#004654',
+        paddingRight : 20,
+        paddingLeft : 20,
+        
+    },
+    ContainerFlexCenterUpInside : {
         flex : 1,
+        backgroundColor : '#FFFFFF',
+        marginLeft : 20,
+        marginRight : 20,
+        borderTopRightRadius : 20,
+        borderTopLeftRadius : 20,
+        alignItems : "flex-end",
         justifyContent : "space-around",
-        alignItems : "center",
+        borderBottomWidth : 2,
+        borderColor : '#B8C1C2',
+        padding: 5,
+    },
+    ContainerFlexCenterDown : {
+        backgroundColor : '#6699CC',
+        paddingRight : 20,
+        paddingLeft : 20,
+        flex : 8,
+    },
+    ContainerFlexCenterDownInside : {
+        flex : 1,
+        backgroundColor : '#FFFFFF',
+        marginLeft : 20,
+        marginRight : 20,
+        marginBottom : 40,
+        borderBottomRightRadius : 20,
+        borderBottomLeftRadius : 20,
+        alignItems : "flex-end",
+        justifyContent : "space-around",
+        padding: 5,
+    },
+    ContainerTask : {
+        flex : 2,
+        alignItems : "flex-end",
+        backgroundColor : 'rgba(255,255,255,1)',
+        margin : 20,
+        borderRadius : 20,
+        padding : 5,
+    },
+    FlatList : {
+        width : '100%',
+        maxHeight : '100%',
+        paddingBottom : 40,
     },
     BackGround : {
-        flex: 3,
+        backgroundColor : '#FDEBD0',
+        flex: 1,
     },
     TaskList : {
+        paddingBottom : 100,
         borderTopWidth: 0.5,
-        flex : 7,
-        padding: 20,
+        width : '100%',
     },
     Date :{
+        color : '#FFFFFF',
+        fontSize : 48,
         padding : 10,
         flexWrap : "wrap",
-        fontSize : 48,
-        textAlign : "center",
-        color : "#FFFFFF",
+        fontSize : 26,
+        textAlign : "left",
         fontStyle : "italic",
-        textShadowColor : "#000",
-        textShadowRadius : 1,
-        textShadowOffset: { width: 4, height:4},
         textTransform : "capitalize"
     },
     Hoje : {
-        fontSize : 48,
-        textAlign : "center",
-        color : "#FFFFFF",
+        color : '#FFFFFF',
+        fontSize : 40,
+        textAlign : "left",
         fontStyle : "italic",
-        textShadowColor : "#000",
-        textShadowRadius : 1,
-        textShadowOffset: { width: 4, height:4},
+
         textTransform : "capitalize"
     },
     Text : {

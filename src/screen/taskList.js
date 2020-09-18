@@ -1,6 +1,5 @@
 import React,{Component} from 'react'
 import {Text,SafeAreaView, ImageBackground, View, TouchableOpacity, Alert} from 'react-native'
-import TaskImage from '../../assets/imgs/office.jpg'
 import Moment from 'moment'
 import 'moment/locale/pt-br'
 import Style from '../style'
@@ -97,24 +96,26 @@ export default class TaskList extends Component{
         return(
         <SafeAreaView style={Style.Container}>
             <AddTask onSave={this.addTask} isVisible={this.state.showAddTask} onCancel={() =>{this.setState({showAddTask : !this.state.showAddTask})}} />
-            <ImageBackground style={Style.BackGround} source={TaskImage}>
-                <View style={Style.IconBar}>
-                    <TouchableOpacity activeOpacity={0.7} onPress={this.toogleFilter}>
-                        <Icon name={this.state.showDoneTask ? 'filter' : 'eye'} size = {30} color = "#C70039"/>
-                    </TouchableOpacity>
-                </View>
-                <View style={Style.ContainerFlexCenter}>
+                <View style={Style.ContainerFlexCenterUp}>
                     <Text style={Style.Hoje}>Hoje</Text>
                     <Text style={Style.Date}>{Moment().locale('pt-br').format('dddd, DD MMMM')}</Text>
+                    <View style = {Style.ContainerFlexCenterUpInside}>    
+                        <View style={Style.IconBar}>
+                            <TouchableOpacity activeOpacity={0.7} onPress={this.toogleFilter}>
+                                <Icon name={this.state.showDoneTask ? 'filter' : 'eye'} size = {30} color = "#000"/>
+                            </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={0.7}  style={Style.OpenModalAddTask} onPress={() => this.setState({showAddTask : true})}>
+                                <Icon name="plus" size={25} color="#FFFFFF"/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
-            </ImageBackground>
-            <SafeAreaView style={Style.TaskList}>
-                <FlatList data ={this.state.visibleTasks} keyExtractor ={item => `${item.id}`} 
-                renderItem={ ({item}) => <Task {...item} toggleTask = {this.toggleTask} onDelete={this.onDelete} />} />
-            </SafeAreaView>
-            <TouchableOpacity activeOpacity={0.7}  style={Style.OpenModalAddTask} onPress={() => this.setState({showAddTask : true})}>
-                <Icon name="plus" size={15} color="#FFFFFF"/>
-            </TouchableOpacity>
+                <View style={Style.ContainerFlexCenterDown}>
+                    <SafeAreaView style={Style.ContainerFlexCenterDownInside}>
+                        <FlatList  style={Style.FlatList} data ={this.state.visibleTasks} keyExtractor ={item => `${item.id}`} 
+                        renderItem={ ({item}) => <Task style={Style.TaskLine} {...item} toggleTask = {this.toggleTask} onDelete={this.onDelete} />} />
+                    </SafeAreaView>
+                </View>
         </SafeAreaView>
         )
     }
