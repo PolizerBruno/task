@@ -16,9 +16,15 @@ export default props => {
             <TouchableOpacity onPress={()=> props.onDelete && props.onDelete(props.id)} style={Style.Exclude}><Icon name="trash" size={20} /><Text>Excluir</Text></TouchableOpacity>
         )
     }
+    const getLeftContetent = () => {
+        return (
+            <TouchableOpacity style={Style.Exclude}><Icon name="calendar" size={20} /><Text>Update</Text></TouchableOpacity>
+        )
+    }
     return (
             <Swipeable 
-            renderRightActions={getRightContetent}
+                renderRightActions={getRightContetent}
+                renderLeftActions={getLeftContetent}
             >
                 <SafeAreaView style = {Style.TaskContainer}>
                 <TouchableNativeFeedback onPress={() => props.toggleTask(props.id)}>
